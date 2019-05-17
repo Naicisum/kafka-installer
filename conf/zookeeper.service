@@ -1,0 +1,17 @@
+[Unit]
+Description=Apache Zookeeper Cluster Management Service
+Wants=
+Requires=network.target network-online.target
+After=network.target network-online.target
+
+[Service]
+User=root
+Type=forking
+EnvironmentFile=/etc/zookeeper/service.properties
+ExecStart=/usr/bin/env ${SERVICE_HOME}/bin/zookeeper-server-start.sh -daemon ${SERVICE_CONF}/zookeeper.properties
+ExecStop=/usr/bin/env ${SERVICE_HOME}/bin/zookeeper-server-stop.sh
+TimeoutSec=90
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target

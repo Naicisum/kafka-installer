@@ -1,0 +1,17 @@
+[Unit]
+Description=Apache Kafka Messaging Service
+Wants=zookeeper.service
+Requires=network.target network-online.target
+After=zookeeper.service network.target network-online.target
+
+[Service]
+User=root
+Type=forking
+EnvironmentFile=/etc/kafka/service.properties
+ExecStart=/usr/bin/env ${SERVICE_HOME}/bin/kafka-server-start.sh -daemon ${SERVICE_CONF}/server.properties
+ExecStop=/usr/bin/env ${SERVICE_HOME}/bin/kafka-server-stop.sh
+TimeoutSec=90
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target

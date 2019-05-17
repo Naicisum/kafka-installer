@@ -1,0 +1,4 @@
+*.rpm
+*.tgz
+server.properties
+zookeeper.properties
