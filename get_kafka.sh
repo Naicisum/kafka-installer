@@ -21,14 +21,14 @@ KAFKA_URL_SHA512="https://www.apache.org/dist/kafka/$KAFKA_VERSION/$KAFKA_FILENA
 
 echo
 echo "Fetching list of mirrors for $KAFKA_FILENAME"
-wget -q --show-progress $KAFKA_URL_FILE -O $DATA_DIR/mirrors.tmp
+wget $KAFKA_URL_FILE -O $DATA_DIR/mirrors.tmp
 echo "Fetching $KAFKA_FILENAME from top mirror"
-wget -q --show-progress $(grep $KAFKA_FILENAME $DATA_DIR/mirrors.tmp | head -n1 | sed 's/^.*>http/http/;s/tgz.*$/tgz/') -O $DATA_DIR/$KAFKA_FILENAME
+wget $(grep $KAFKA_FILENAME $DATA_DIR/mirrors.tmp | head -n1 | sed 's/^.*>http/http/;s/tgz.*$/tgz/') -O $DATA_DIR/$KAFKA_FILENAME
 rm -f $DATA_DIR/mirrors.tmp > /dev/null 2>&1
 
 echo
 echo "Fetching SHA512 Checksum for $KAFKA_FILENAME"
-wget -q --show-progress $KAFKA_URL_SHA512 -O $DATA_DIR/checksum.sha512
+wget $KAFKA_URL_SHA512 -O $DATA_DIR/checksum.sha512
 cat $DATA_DIR/checksum.sha512 | tr -d '\n'| tr -d ' ' | tr '[:upper:]' '[:lower:]' | awk 'BEGIN{FS=":"}{print $2 "  " $1}' > $DATA_DIR/$KAFKA_FILENAME.sha512
 rm -f $DATA_DIR/checksum.sha512 > /dev/null 2>&1
 

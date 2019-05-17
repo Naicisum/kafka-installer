@@ -182,6 +182,9 @@ sub_getpaths()
     echo "In which directory do you want to install Kafka?"
     sub_readinput PATH_INSTALL
 
+    PATH_KAFKA_DATA=$PATH_INSTALL/data/kafka-logs
+    PATH_ZOO_DATA=$PATH_INSTALL/data/zookeeper
+
     echo
     echo "In which directory do you want to install Kafka conf?"
     sub_readinput PATH_KAFKA_CONF
