@@ -3,6 +3,7 @@ Description=Apache Zookeeper Cluster Management Service
 Wants=
 Requires=network.target network-online.target
 After=network.target network-online.target
+Before=kafka.service
 
 [Service]
 User=root
@@ -12,6 +13,8 @@ ExecStart=/usr/bin/env ${SERVICE_HOME}/bin/zookeeper-server-start.sh -daemon ${S
 ExecStop=/usr/bin/env ${SERVICE_HOME}/bin/zookeeper-server-stop.sh
 TimeoutSec=90
 SuccessExitStatus=143
+Restart=on-failure
+RestartSec=2s
 
 [Install]
 WantedBy=multi-user.target

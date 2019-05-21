@@ -2,7 +2,7 @@
 Description=Apache Kafka Messaging Service
 Wants=zookeeper.service
 Requires=network.target network-online.target
-After=zookeeper.service network.target network-online.target
+After=network.target network-online.target zookeeper.service
 
 [Service]
 User=root
@@ -12,6 +12,8 @@ ExecStart=/usr/bin/env ${SERVICE_HOME}/bin/kafka-server-start.sh -daemon ${SERVI
 ExecStop=/usr/bin/env ${SERVICE_HOME}/bin/kafka-server-stop.sh
 TimeoutSec=90
 SuccessExitStatus=143
+Restart=on-failure
+RestartSec=2s
 
 [Install]
 WantedBy=multi-user.target
