@@ -99,6 +99,7 @@ sub_addbrokers()
     local __inputval=$1
     local __zooconf=$2
     local __numhosts=$(echo ${!__inputval} | awk 'BEGIN {FS=","}{print NF}')
+    echo >> $__zooconf
     for (( i=1; i <= $__numhosts; i++ ))
     do
         local __singlehost=$(echo ${!__inputval} | awk -v i="$i" 'BEGIN {FS=","}{print $i}' | sed 's/:2181//g')

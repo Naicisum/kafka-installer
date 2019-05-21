@@ -1,6 +1,7 @@
 Script to help install Kafka on CentOS/RHEL and install services
 
-Requires OpenJDK 11 in repository
+Requires OpenJDK 11 packages via standard yum repository
+Requires commands: awk grep ip nslookup sed sha1sum sha512sum tar wget yum
 Requires internet access to download kafka_2.12-2.2.0.tgz
 
 Run 'get_kafka.sh' to download Kafka
